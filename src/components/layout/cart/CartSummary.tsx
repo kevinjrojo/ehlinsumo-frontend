@@ -1,5 +1,6 @@
 "use client";
 import { useCart } from "@/context/cardContext";
+import { formatPrice } from "@/utils/formatPrice";
 
 export default function CartSummary() {
   const { total, clearCart } = useCart();
@@ -7,7 +8,7 @@ export default function CartSummary() {
   return (
     <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <h2 className="text-2xl font-semibold">
-        Total: <span className="text-green-600">${total.toFixed(2)}</span>
+        Total: <span className="text-green-600">${formatPrice(total)}</span>
       </h2>
 
       <div className="flex gap-3">

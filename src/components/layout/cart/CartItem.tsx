@@ -1,8 +1,8 @@
 "use client";
-import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { useCart } from "@/context/cardContext";
 import { CartItem as CartItemType } from "@/types/cartTypes";
+import { formatPrice } from "@/utils/formatPrice";
 
 export default function CartItem({
   id,
@@ -18,12 +18,10 @@ export default function CartItem({
       {/* IZQUIERDA */}
       <div className="flex items-center gap-3 w-full sm:w-auto">
         {image && (
-          <Image
+          <img
             src={image}
             alt={name}
-            width={56}
-            height={56}
-            className="rounded-md object-cover sm:w-16 sm:h-16"
+            className="h-10 w-10 object-cover object-center group-hover:scale-105 transition-transform duration-300"
           />
         )}
 
@@ -33,7 +31,7 @@ export default function CartItem({
           </h2>
 
           <p className="text-gray-700 dark:text-gray-200 text-sm sm:text-base">
-            ${price.toFixed(2)} x {quantity}
+            ${formatPrice(price)} x {quantity}
           </p>
         </div>
       </div>
@@ -41,7 +39,7 @@ export default function CartItem({
       {/* DERECHA */}
       <div className="flex items-center justify-between w-full sm:w-auto">
         <p className="font-semibold text-gray-800 dark:text-gray-100 text-lg sm:text-xl">
-          ${(price * quantity).toFixed(2)}
+          ${formatPrice(price * quantity)}
         </p>
 
         <button

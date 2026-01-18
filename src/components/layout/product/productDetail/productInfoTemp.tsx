@@ -5,6 +5,7 @@ import PaymentMethods from "./paymentMethods";
 import { useCart } from "@/context/cardContext";
 import type { Product } from "@/types/cartTypes";
 import { useState } from "react";
+import { formatPrice } from "@/utils/formatPrice";
 
 interface ProductInfoTempProps {
   product: {
@@ -51,12 +52,14 @@ export default function ProductInfoTemp({ product }: ProductInfoTempProps) {
         {product.name}
       </h1>
 
-      <p className="text-lg text-gray-800 dark:text-gray-800 mt-1">
-        {product.description}
+      <p>
+        {product.description
+          ?.map((p) => p.children.map((c) => c.text).join(""))
+          .join("\n")}
       </p>
 
       <p className="text-3xl font-bold mt-4 text-gray-900 dark:text-black">
-        ${product.price.toLocaleString("es-AR")}
+        ${formatPrice(product.price)}
       </p>
 
       <div className="mt-8 flex items-center space-x-4">

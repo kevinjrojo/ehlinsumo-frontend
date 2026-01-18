@@ -1,3 +1,5 @@
+"use client";
+
 import ProductImage from "./productImage";
 import ProductInfoTemp from "./productInfoTemp";
 

@@ -1,14 +1,16 @@
 import ProductDetail from "@/components/layout/product/productDetail/productDetail";
-import { products } from "@/data/products";
+import { getProductById } from "@/services/products";
 
-export default async function ProductsDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
 
-  const product = products.find((p) => p.id === Number(id));
+export default async function ProductsDetailPage({ params }: PageProps) {
+  const { id } = await params; // 👈 ESTO ES CLAVE
+
+  const product = await getProductById(id.trim());
 
   if (!product) {
     return <p className="text-center py-20">Producto no encontrado</p>;
