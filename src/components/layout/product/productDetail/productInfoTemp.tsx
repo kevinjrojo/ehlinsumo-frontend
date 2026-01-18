@@ -13,7 +13,7 @@ interface ProductInfoTempProps {
     name: string;
     description: string;
     category: string;
-    subCategory: string;
+    subCategory?: string;
     price: number;
     image?: string;
   };

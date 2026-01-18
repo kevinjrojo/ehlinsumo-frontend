@@ -4,6 +4,7 @@ import { getProductById } from "@/services/products";
 interface PageProps {
   params: Promise<{
     id: string;
+    subCategory?: string;
   }>;
 }
 
