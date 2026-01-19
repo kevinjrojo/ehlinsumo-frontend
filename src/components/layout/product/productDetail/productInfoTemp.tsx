@@ -2,6 +2,7 @@
 
 import QuantitySelector from "./quantitySelector";
 import PaymentMethods from "./paymentMethods";
+import type { RichText } from "@/types/strapi";
 import { useCart } from "@/context/cardContext";
 import type { Product } from "@/types/cartTypes";
 import { useState } from "react";
@@ -11,7 +12,7 @@ interface ProductInfoTempProps {
   product: {
     id: number;
     name: string;
-    description: string;
+    description: RichText;
     category: string;
     price: number;
     image?: string;
