@@ -8,7 +8,7 @@ interface Product {
   id: number;
   name: string;
   documentId: string;
-  subCategory?: string;
+
   price: number;
   image: string;
 }
