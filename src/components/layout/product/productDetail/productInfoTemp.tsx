@@ -13,7 +13,6 @@ interface ProductInfoTempProps {
     name: string;
     description: string;
     category: string;
-    subCategory?: string;
     price: number;
     image?: string;
   };
@@ -42,10 +41,9 @@ export default function ProductInfoTemp({ product }: ProductInfoTempProps) {
     <div>
       <div className="flex items-center text-sm text-gray-800 dark:text-gray-900 space-x-2">
         <a className="hover:text-primary" href="#">
+          <strong>Categoria : </strong>
           {product.category}
         </a>
-        <span>/</span>
-        <span>{product.subCategory}</span>
       </div>
 
       <h1 className="text-3xl font-bold mt-4 text-gray-900 dark:text-black">
