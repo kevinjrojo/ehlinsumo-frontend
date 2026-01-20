@@ -1,5 +1,4 @@
-import type { ProductAPI } from "@/types/product";
-import type { ProductUI } from "@/types/ui";
+import type { ProductUI } from "@/types/productUI";
 
 const STRAPI_URL =
   process.env.NEXT_PUBLIC_STRAPI_URL || "http://127.0.0.1:1337";
@@ -19,7 +18,7 @@ export async function getProducts(): Promise<ProductUI[]> {
       documentId: item.documentId,
       name: item.name,
       price: item.price,
-      image: item.image?.url ? `${STRAPI_URL}${item.image.url}` : "", // 👈 NUNCA null
+      image: item.image?.url ? `${STRAPI_URL}${item.image.url}` : "", // 👈 SIEMPRE string
     }),
   );
 }

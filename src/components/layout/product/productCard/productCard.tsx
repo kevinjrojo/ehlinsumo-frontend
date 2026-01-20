@@ -3,17 +3,9 @@ import Link from "next/link";
 import ProductImage from "./ProductImage";
 import ProductInfo from "./ProductInfo";
 import AddToCartButton from "./AddToCartButton";
+import type { ProductUI } from "@/types/productUI";
 
-interface Product {
-  id: number;
-  name: string;
-  documentId: string;
-
-  price: number;
-  image: string;
-}
-
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: ProductUI }) {
   console.log("LINK PRODUCT:", product);
   return (
     <article className="group relative bg-gray-100 border border-gray-400 rounded-md p-2">

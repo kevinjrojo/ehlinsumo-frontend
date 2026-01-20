@@ -3,16 +3,10 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../productCard/productCard";
 import { getProducts } from "@/services/products";
-interface Product {
-  id: number;
-  documentId: string;
-  name: string;
-  price: number;
-  image: string | null;
-}
+import type { ProductUI } from "@/types/productUI";
 
 export default function ProductGrid() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductUI[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
