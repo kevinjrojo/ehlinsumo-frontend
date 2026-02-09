@@ -18,7 +18,7 @@ export async function getProducts(): Promise<ProductUI[]> {
       documentId: item.documentId,
       name: item.name,
       price: item.price,
-      image: item.image?.url ? `${STRAPI_URL}${item.image.url}` : "", // 👈 SIEMPRE string
+      image: item.image?.url ? `${STRAPI_URL}${item.image.url}` : "",
     }),
   );
 }
