@@ -1,7 +1,7 @@
 "use client";
 
 interface ProductImageProps {
-  image: string;
+  image: string | null;
   name: string;
 }
 

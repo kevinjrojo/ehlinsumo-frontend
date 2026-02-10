@@ -12,15 +12,18 @@ export async function getProducts(): Promise<ProductUI[]> {
 
   const json = await res.json();
 
-  return json.data.map(
-    (item: any): ProductUI => ({
+  return json.data.map((item: any): ProductUI => {
+    const imageItem = item.image?.[0]; // 👈 PRIMERA IMAGEN
+    const imageUrl = imageItem?.formats?.small?.url || imageItem?.url;
+
+    return {
       id: item.id,
       documentId: item.documentId,
       name: item.name,
       price: item.price,
-      image: item.image?.url ? `${STRAPI_URL}${item.image.url}` : "",
-    }),
-  );
+      image: imageUrl ? `${STRAPI_URL}${imageUrl}` : null,
+    };
+  });
 }
 
 export async function getProductById(documentId: string) {
@@ -38,13 +41,19 @@ export async function getProductById(documentId: string) {
 
   if (!item) return null;
 
+  const imageItem = item.image?.[0];
+  const imageUrl = imageItem?.formats?.large?.url || imageItem?.url;
+  const descriptionText = item.descripcion?.[0]?.children?.[0]?.text ?? "";
+
+  const categoryText = item.category?.[0]?.children?.[0]?.text ?? "";
+
   return {
     id: item.id,
     documentId: item.documentId,
     name: item.name,
-    description: item.description,
-    category: item.Categoria,
+    description: descriptionText,
+    category: categoryText,
     price: item.price,
-    image: item.image?.url ? `${STRAPI_URL}${item.image.url}` : "",
+    image: imageUrl ? `${STRAPI_URL}${imageUrl}` : null,
   };
 }

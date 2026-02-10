@@ -12,7 +12,7 @@ interface ProductInfoTempProps {
   product: {
     id: number;
     name: string;
-    description: RichText;
+    description: string;
     category: string;
     price: number;
     image?: string;
@@ -29,7 +29,7 @@ export default function ProductInfoTemp({ product }: ProductInfoTempProps) {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image ?? "",
+      image: product.image,
     };
 
     // 👉 tu contexto solo agrega uno — luego lo mejoramos
@@ -51,11 +51,9 @@ export default function ProductInfoTemp({ product }: ProductInfoTempProps) {
         {product.name}
       </h1>
 
-      <p>
-        {product.description
-          ?.map((p) => p.children.map((c) => c.text).join(""))
-          .join("\n")}
-      </p>
+      {product.description && (
+        <p className="text-gray-700">{product.description}</p>
+      )}
 
       <p className="text-3xl font-bold mt-4 text-gray-900 dark:text-black">
         ${formatPrice(product.price)}

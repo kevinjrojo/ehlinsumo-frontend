@@ -10,7 +10,7 @@ interface Product {
   description: RichText;
   category: string;
   price: number;
-  image: string;
+  image: string | null;
 }
 
 export default function ProductDetail({ product }: { product: Product }) {
