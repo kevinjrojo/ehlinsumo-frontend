@@ -1,7 +1,6 @@
 import type { ProductUI } from "@/types/productUI";
 
-const STRAPI_URL =
-  process.env.NEXT_PUBLIC_STRAPI_URL || "http://127.0.0.1:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 export async function getProducts(): Promise<ProductUI[]> {
   const res = await fetch(`${STRAPI_URL}/api/products?populate=*`);
