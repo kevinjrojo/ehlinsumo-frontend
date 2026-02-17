@@ -1,6 +1,5 @@
 "use client";
 
-import type { RichText } from "@/types/strapi";
 import ProductImage from "./productImage";
 import ProductInfoTemp from "./productInfoTemp";
 

@@ -53,8 +53,9 @@ export async function getProductById(documentId: string) {
   const imageItem = item.image?.[0];
   const imageUrl = imageItem?.formats?.large?.url || imageItem?.url;
 
-  const descriptionText = extractText(item.descripcion);
-  const categoryText = extractText(item.category);
+  const descriptionText = extractText(item.description);
+  const categoryText = item.category ?? "";
+
   return {
     id: item.id,
     documentId: item.documentId,
