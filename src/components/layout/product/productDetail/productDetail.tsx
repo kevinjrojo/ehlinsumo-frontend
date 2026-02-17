@@ -7,7 +7,7 @@ import ProductInfoTemp from "./productInfoTemp";
 interface Product {
   id: number;
   name: string;
-  description: RichText;
+  description: string;
   category: string;
   price: number;
   image: string | null;

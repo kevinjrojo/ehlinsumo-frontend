@@ -25,6 +25,16 @@ export async function getProducts(): Promise<ProductUI[]> {
   });
 }
 
+function extractText(richText: any): string {
+  if (!Array.isArray(richText)) return "";
+
+  return richText
+    .flatMap((block) => block.children || [])
+    .map((child: any) => child.text)
+    .join(" ")
+    .trim();
+}
+
 export async function getProductById(documentId: string) {
   const res = await fetch(
     `${STRAPI_URL}/api/products?filters[documentId][$eq]=${documentId}&populate=*`,
@@ -42,10 +52,9 @@ export async function getProductById(documentId: string) {
 
   const imageItem = item.image?.[0];
   const imageUrl = imageItem?.formats?.large?.url || imageItem?.url;
-  const descriptionText = item.descripcion?.[0]?.children?.[0]?.text ?? "";
 
-  const categoryText = item.category?.[0]?.children?.[0]?.text ?? "";
-
+  const descriptionText = extractText(item.descripcion);
+  const categoryText = extractText(item.category);
   return {
     id: item.id,
     documentId: item.documentId,

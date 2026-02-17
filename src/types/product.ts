@@ -3,7 +3,7 @@ export interface ProductAPI {
   id: number;
   documentId: string;
   name: string;
-  description: any;
+  description: string;
   category: string;
   price: number;
   image: string | null;
