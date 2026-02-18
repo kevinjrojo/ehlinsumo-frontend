@@ -3,7 +3,12 @@ import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/cardContext";
 
 interface AddToCartButtonProps {
-  product: { id: number; name: string; price: number; image: string };
+  product: {
+    id: number;
+    name: string;
+    price: number;
+    image: string | undefined;
+  };
 }
 
 export default function AddToCartButton({ product }: AddToCartButtonProps) {
