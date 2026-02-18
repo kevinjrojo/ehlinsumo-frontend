@@ -20,7 +20,7 @@ export async function getProducts(): Promise<ProductUI[]> {
       documentId: item.documentId,
       name: item.name,
       price: item.price,
-      image: imageUrl ? `${STRAPI_URL}${imageUrl}` : null,
+      image: imageUrl ? `${STRAPI_URL}${imageUrl}` : undefined,
     };
   });
 }
@@ -63,6 +63,6 @@ export async function getProductById(documentId: string) {
     description: descriptionText,
     category: categoryText,
     price: item.price,
-    image: imageUrl ? `${STRAPI_URL}${imageUrl}` : null,
+    image: imageUrl ? `${STRAPI_URL}${imageUrl}` : undefined,
   };
 }

@@ -1,7 +1,7 @@
 "use client";
 
 interface ProductImageProps {
-  image: string | null;
+  image: string | undefined;
   name: string;
 }
 
@@ -16,11 +16,13 @@ export default function ProductImage({ image, name }: ProductImageProps) {
 
   return (
     <section className="aspect-square w-full overflow-hidden rounded-lg bg-gray-500 dark:bg-gray-400">
-      <img
-        src={image}
-        alt={name}
-        className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-      />
+      {image && (
+        <img
+          alt={name}
+          src={image}
+          className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+        />
+      )}
     </section>
   );
 }

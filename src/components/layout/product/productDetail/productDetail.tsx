@@ -9,7 +9,7 @@ interface Product {
   description: string;
   category: string;
   price: number;
-  image: string | null;
+  image: string | undefined;
 }
 
 export default function ProductDetail({ product }: { product: Product }) {
