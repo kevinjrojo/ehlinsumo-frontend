@@ -1,6 +1,8 @@
 import type { ProductUI } from "@/types/productUI";
 import type {
   StrapiCollectionResponse,
+  StrapiImage,
+  StrapiMediaRelation,
   StrapiProduct,
   StrapiRichTextBlock,
 } from "@/types/strapi";
@@ -31,6 +33,39 @@ function assertStrapiUrl(): string {
   return STRAPI_URL;
 }
 
+function isMediaRelation(
+  image: StrapiProduct["image"],
+): image is StrapiMediaRelation {
+  return Boolean(image) && typeof image === "object" && "data" in image;
+}
+
+function pickFirstImage(
+  image: StrapiProduct["image"],
+): StrapiImage | undefined {
+  if (!image) return undefined;
+
+  if (Array.isArray(image)) return image[0];
+
+  if (isMediaRelation(image)) {
+    const { data } = image;
+    if (!data) return undefined;
+    return Array.isArray(data) ? data[0] : data;
+  }
+
+  return image;
+}
+
+function extractPreferredImageUrl(image?: StrapiImage): string | undefined {
+  if (!image) return undefined;
+  return (
+    image.formats?.small?.url ??
+    image.formats?.medium?.url ??
+    image.formats?.large?.url ??
+    image.formats?.thumbnail?.url ??
+    image.url
+  );
+}
+
 export async function getProducts(): Promise<ProductUI[]> {
   const baseUrl = assertStrapiUrl();
   const res = await fetch(`${baseUrl}/api/products?populate=*`);
@@ -38,12 +73,11 @@ export async function getProducts(): Promise<ProductUI[]> {
   if (!res.ok) {
     throw new Error("Error al obtener productos");
   }
-
   const json: StrapiCollectionResponse<StrapiProduct> = await res.json();
 
   return json.data.map((item): ProductUI => {
-    const imageItem = item.image?.[0];
-    const imageUrl = imageItem?.formats?.small?.url ?? imageItem?.url;
+    const imageItem = pickFirstImage(item.image);
+    const imageUrl = extractPreferredImageUrl(imageItem);
 
     return {
       id: item.id,
@@ -71,16 +105,18 @@ export async function getProductById(documentId: string) {
 
   if (!item) return null;
 
-  const imageItem = item.image?.[0];
-  const imageUrl = imageItem?.formats?.large?.url ?? imageItem?.url;
+  const imageItem = pickFirstImage(item.image);
+  const imageUrl = extractPreferredImageUrl(imageItem);
 
   return {
     id: item.id,
     documentId: item.documentId,
     name: item.name,
+
     description: extractText(item.description),
     category: item.category ?? "",
     price: item.price,
+
     image: getImageUrl(baseUrl, imageUrl),
   };
 }

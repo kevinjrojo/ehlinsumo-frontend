@@ -6,7 +6,9 @@ export interface StrapiImage {
   url: string;
   formats?: {
     small?: StrapiImageFormat;
+    medium?: StrapiImageFormat;
     large?: StrapiImageFormat;
+    thumbnail?: StrapiImageFormat;
   };
 }
 
@@ -18,6 +20,10 @@ export interface StrapiRichTextBlock {
   children?: StrapiRichTextChild[];
 }
 
+export interface StrapiMediaRelation {
+  data?: StrapiImage | StrapiImage[] | null;
+}
+
 export interface StrapiProduct {
   id: number;
   documentId: string;
@@ -25,7 +31,7 @@ export interface StrapiProduct {
   description?: StrapiRichTextBlock[];
   category?: string;
   price: number;
-  image?: StrapiImage[];
+  image?: StrapiImage[] | StrapiImage | StrapiMediaRelation | null;
 }
 
 export interface StrapiCollectionResponse<T> {

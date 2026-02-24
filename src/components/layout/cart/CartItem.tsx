@@ -3,6 +3,7 @@ import { Trash2 } from "lucide-react";
 import { useCart } from "@/context/cardContext";
 import { CartItem as CartItemType } from "@/types/cartTypes";
 import { formatPrice } from "@/utils/formatPrice";
+import Image from "next/image";
 
 export default function CartItem({
   id,
@@ -18,9 +19,11 @@ export default function CartItem({
       {/* IZQUIERDA */}
       <div className="flex items-center gap-3 w-full sm:w-auto">
         {image && (
-          <img
+          <Image
             src={image}
             alt={name}
+            width={40}
+            height={40}
             className="h-10 w-10 object-cover object-center group-hover:scale-105 transition-transform duration-300"
           />
         )}
