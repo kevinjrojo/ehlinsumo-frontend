@@ -82,6 +82,8 @@ export async function getProducts(): Promise<ProductUI[]> {
     return {
       id: item.id,
       documentId: item.documentId,
+      category: item.category ?? "",
+      subCategory: item.subCategory ?? item.subcategory ?? "",
       name: item.name,
       price: item.price,
       image: getImageUrl(baseUrl, imageUrl),
@@ -112,7 +114,7 @@ export async function getProductById(documentId: string) {
     id: item.id,
     documentId: item.documentId,
     name: item.name,
-
+    subCategory: item.subCategory ?? item.subcategory ?? "",
     description: extractText(item.description),
     category: item.category ?? "",
     price: item.price,

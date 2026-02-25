@@ -7,23 +7,12 @@ import MobileMenu from "./mobileMenu";
 import SearchBar from "./searchBar";
 import Link from "next/link";
 import { useCart } from "@/context/cardContext";
+import { categories } from "@/constants/categories";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState<number | null>(null);
   const { totalItems } = useCart();
-
-  const categories = [
-    {
-      name: "Ferretería/Herramientas ",
-      items: ["Taladros", "Destornilladores", "Llaves", "Cintas métricas"],
-    },
-    {
-      name: "Repuestos/Accesorios",
-      items: ["Pilas", "Enchufes", "Lámparas"],
-    },
-    { name: "Hogar/Electro", items: ["Cocina", "Exterior", "Comercios"] },
-  ];
 
   return (
     <header className="bg-green-600 text-white  w-full shadow-md sticky top-0 z-50">

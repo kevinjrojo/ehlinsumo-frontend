@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import CategoryDropdown from "./categoryDropdown";
+import type { CategoryItem } from "@/constants/categories";
 
 export default function DesktopNav({
   categories,
 }: {
-  categories: { name: string; items: string[] }[];
+  categories: CategoryItem[];
 }) {
   return (
     <div className="flex items-center gap-6 z-10">

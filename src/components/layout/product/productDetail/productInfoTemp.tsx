@@ -7,6 +7,7 @@ import { useCart } from "@/context/cardContext";
 import type { Product } from "@/types/cartTypes";
 import { useState } from "react";
 import { formatPrice } from "@/utils/formatPrice";
+import { Link } from "lucide-react";
 
 interface ProductInfoTempProps {
   product: {
@@ -14,6 +15,7 @@ interface ProductInfoTempProps {
     name: string;
     description: string;
     category: string;
+    subCategory: string;
     price: number;
     image?: string;
   };
@@ -41,9 +43,14 @@ export default function ProductInfoTemp({ product }: ProductInfoTempProps) {
   return (
     <div>
       <div className="flex items-center text-sm text-gray-800 dark:text-gray-900 space-x-2">
-        <a className="hover:text-primary" href="#">
-          <strong>Categoria : </strong>
-          {product.category}
+        <p className="hover:text-primary">
+          Categoria :<strong> {product.category}</strong>
+        </p>
+        <a
+          className="hover:text-primary"
+          href={`/?category=${encodeURIComponent(product.category)}&subCategory=${encodeURIComponent(product.subCategory)}`}
+        >
+          Subcategoria :<strong> {product.subCategory}</strong>
         </a>
       </div>
 

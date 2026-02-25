@@ -30,6 +30,8 @@ export interface StrapiProduct {
   name: string;
   description?: StrapiRichTextBlock[];
   category?: string;
+  subCategory?: string;
+  subcategory?: string;
   price: number;
   image?: StrapiImage[] | StrapiImage | StrapiMediaRelation | null;
 }

@@ -1,4 +1,14 @@
 import { X } from "lucide-react";
+import Link from "next/link";
+import type { CategoryItem } from "@/constants/categories";
+
+interface MobileMenuProps {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  categories: CategoryItem[];
+  openCategory: number | null;
+  setOpenCategory: (value: number | null) => void;
+}
 
 export default function MobileMenu({
   open,
@@ -6,7 +16,7 @@ export default function MobileMenu({
   categories,
   openCategory,
   setOpenCategory,
-}) {
+}: MobileMenuProps) {
   return (
     <div
       className={`fixed top-0 left-0 h-full w-64 bg-green-700 text-white transform ${
@@ -33,12 +43,15 @@ export default function MobileMenu({
 
             {openCategory === idx && (
               <ul className="pl-4 text-sm space-y-1">
-                {cat.items.map((item, i) => (
-                  <li
-                    key={i}
-                    className="hover:bg-green-600 px-2 py-1 rounded-md cursor-pointer"
-                  >
-                    {item}
+                {cat.subcategories.map((item) => (
+                  <li key={item}>
+                    <Link
+                      href={`/?category=${encodeURIComponent(cat.name)}&subCategory=${encodeURIComponent(item)}`}
+                      className="block hover:bg-green-600 px-2 py-1 rounded-md cursor-pointer"
+                      onClick={() => setOpen(false)}
+                    >
+                      {item}
+                    </Link>
                   </li>
                 ))}
               </ul>
