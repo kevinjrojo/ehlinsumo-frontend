@@ -7,7 +7,6 @@ import { useCart } from "@/context/cardContext";
 import type { Product } from "@/types/cartTypes";
 import { useState } from "react";
 import { formatPrice } from "@/utils/formatPrice";
-import { Link } from "lucide-react";
 
 interface ProductInfoTempProps {
   product: {

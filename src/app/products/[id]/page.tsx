@@ -2,13 +2,13 @@ import ProductDetail from "@/components/layout/product/productDetail/productDeta
 import { getProductById } from "@/services/products";
 
 interface PageProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 export default async function ProductsDetailPage({ params }: PageProps) {
-  const { id } = await params; // 👈 ESTO ES CLAVE
+  const { id } = await params;
 
   const product = await getProductById(id.trim());
 
