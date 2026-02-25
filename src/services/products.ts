@@ -36,7 +36,12 @@ function assertStrapiUrl(): string {
 function isMediaRelation(
   image: StrapiProduct["image"],
 ): image is StrapiMediaRelation {
-  return Boolean(image) && typeof image === "object" && "data" in image;
+  return (
+    image !== null &&
+    image !== undefined &&
+    typeof image === "object" &&
+    "data" in image
+  );
 }
 
 function pickFirstImage(

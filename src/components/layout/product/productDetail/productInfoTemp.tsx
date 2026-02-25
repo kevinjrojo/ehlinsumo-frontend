@@ -2,7 +2,6 @@
 
 import QuantitySelector from "./quantitySelector";
 import PaymentMethods from "./paymentMethods";
-
 import { useCart } from "@/context/cardContext";
 import type { Product } from "@/types/cartTypes";
 import { useState } from "react";
