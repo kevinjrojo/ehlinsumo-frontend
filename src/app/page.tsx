@@ -1,5 +1,6 @@
 import SearchBar from "@/components/layout/navbar/searchBar";
 import ProductGrid from "@/components/layout/product/productGrid/productGrid";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -7,7 +8,9 @@ export default function Home() {
       <div className="sm:hidden mb-4">
         <SearchBar />
       </div>
-      <ProductGrid />
+      <Suspense fallback={<p>Cargando productos...</p>}>
+        <ProductGrid />
+      </Suspense>
     </main>
   );
 }
