@@ -5,6 +5,7 @@ import ProductCard from "../productCard/productCard";
 import { getProducts } from "@/services/products";
 import type { ProductUI } from "@/types/productUI";
 import { useSearchParams } from "next/navigation";
+import { normalizeText } from "@/utils/normalizeText";
 
 export default function ProductGrid() {
   const searchParams = useSearchParams();
@@ -24,13 +25,16 @@ export default function ProductGrid() {
     return <p>Cargando productos...</p>;
   }
 
+  const normalizedSelectedCategory = normalizeText(selectedCategory);
+  const normalizedSelectedSubCategory = normalizeText(selectedSubCategory);
+
   const filteredProducts = products.filter((item) => {
-    const matchCategory = selectedCategory
-      ? item.category === selectedCategory
+    const matchCategory = normalizedSelectedCategory
+      ? normalizeText(item.category) === normalizedSelectedCategory
       : true;
 
-    const matchSubCategory = selectedSubCategory
-      ? item.subCategory === selectedSubCategory
+    const matchSubCategory = normalizedSelectedSubCategory
+      ? normalizeText(item.subCategory) === normalizedSelectedSubCategory
       : true;
 
     return matchCategory && matchSubCategory;
